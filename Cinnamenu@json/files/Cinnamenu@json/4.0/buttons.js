@@ -101,13 +101,16 @@ class CategoryListButton extends PopupBaseMenuItem {
       this.addActor(this.icon);
     }
 
-    this.categoryNameText = categoryNameText;
-    this.label = new Label({
-      text: this.categoryNameText,
-      style_class: 'menu-category-button-label'
-    });
-    this.addActor(this.label);
-    this.label.realize();
+    // huntantr
+    if (this.state.settings.showCategoryText) {
+      this.categoryNameText = categoryNameText;
+      this.label = new Label({
+        text: this.categoryNameText,
+        style_class: 'menu-category-button-label'
+      });
+      this.addActor(this.label);
+      this.label.realize();
+    }
 
     this.actor._delegate = {
       handleDragOver: (source, /* actor, x, y, time */) => {
@@ -1135,11 +1138,13 @@ class GroupButton extends PopupBaseMenuItem {
     if (this.user || this.icon.icon_name.indexOf('view') === -1) {
       this.state.trigger('closeMenu');
     }
+    /** huntantr
     if (this.icon.icon_name && this.icon.icon_name.indexOf('view') > -1) {
       this.toggleViewMode();
     } else if (this.callback) {
       this.callback();
     }
+    */
     return true;
   }
 
@@ -1198,6 +1203,7 @@ class GroupButton extends PopupBaseMenuItem {
     this.icon.realize();
   }
 
+  /** huntantr
   toggleViewMode() {
     if (this.state.isListView) {
       this.state.set({isListView: false});
@@ -1216,6 +1222,7 @@ class GroupButton extends PopupBaseMenuItem {
     this.handleLeave();
     setTimeout(() => this.handleEnter(), 300);
   }
+  */
 
   destroy() {
     this.signals.disconnectAllSignals();

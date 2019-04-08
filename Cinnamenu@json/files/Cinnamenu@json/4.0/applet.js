@@ -270,10 +270,12 @@ class CinnamenuApplet extends TextIconApplet {
 
     // Init settings
     this.loadSettings(true);
+    /** huntantr
     this.state.set({
       isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
       fallbackDescription: this.state.settings.descriptionPlacement === 2 || this.state.settings.descriptionPlacement < 4 ? _('No description available') : ''
     });
+    */
     global.settings.connect('changed::enabled-search-providers', (...args) => this.onEnabledSearchProvidersChange(...args));
 
     this.onEnableBookmarksChange(this.state.settings.enableBookmarks, true);
@@ -679,11 +681,13 @@ class CinnamenuApplet extends TextIconApplet {
         value: 'menuLabel',
         cb: this.updateIconAndLabel
       },
+      /** huntantr
       {
         key: 'startup-view-mode',
         value: 'startupViewMode',
         cb: this.refresh
       },
+      */
       {
         key: 'apps-grid-column-count',
         value: 'appsGridColumnCount',
@@ -717,6 +721,11 @@ class CinnamenuApplet extends TextIconApplet {
       {
         key: 'show-category-icons',
         value: 'showCategoryIcons',
+        cb: this.refresh
+      },
+      {
+        key: 'show-category-text',
+        value: 'showCategoryText',
         cb: this.refresh
       },
       {
@@ -1011,7 +1020,7 @@ class CinnamenuApplet extends TextIconApplet {
     if (isReRender) {
       buttons.push(find(this.categoryButtons, button => button.id === 'all'));
     } else {
-      buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), 'computer')];
+      buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), 'view-list-text')];
     }
 
     let tree = this.appSystem.get_tree();
@@ -1049,7 +1058,7 @@ class CinnamenuApplet extends TextIconApplet {
       [this.state.settings.showPlaces, 'places', _('Places'), 'folder', 'selectAllPlaces'],
       [this.state.recentEnabled, 'recent', _('Recent Files'), 'folder-recent', 'selectRecent'],
       [this.state.settings.enableBookmarks, 'bookmarks', _('Bookmarks'), 'emblem-favorite', 'selectWebBookmarks'],
-      [true, 'favorites', _('Favorite Apps'), 'address-book-new', 'selectCategory']
+      [true, 'favorites', _('Favorite Apps'), 'applications-featured', 'selectCategory']
     ];
     for (let i = 0; i < params.length; i++) {
       if (!params[i][0]) {
@@ -1151,12 +1160,15 @@ class CinnamenuApplet extends TextIconApplet {
       this.menu.open();
       return;
     }
+    /** huntantr
     let isListView = this.state.settings.startupViewMode === ApplicationsViewMode.LIST, iconSize;
     if (isListView) {
       iconSize = this.state.settings.appsListIconSize > 0 ? this.state.settings.appsListIconSize : 28;
     } else {
       iconSize = this.state.settings.appsGridIconSize > 0 ? this.state.settings.appsGridIconSize : 64;
     }
+    */
+    iconSize = this.state.settings.appsGridIconSize > 0 ? this.state.settings.appsGridIconSize : 64;
     this.state.set({
       isListView: isListView,
       iconSize: iconSize
@@ -1938,7 +1950,10 @@ class CinnamenuApplet extends TextIconApplet {
       this.activeContainer.show();
     }
     if (!this.activeContainer) {
+      /** huntantr
       this.activeContainer = this.state.settings.startupViewMode === ApplicationsViewMode.LIST ? this.applicationsListBox : this.applicationsGridBox;
+      */
+      this.activeContainer = this.applicationsGridBox;
     }
 
     // Since we don't want to monitor which windows need added or removed like a window list applet,
@@ -2161,10 +2176,12 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   display() {
+    /** huntantr
     this.state.set({
       isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
       displayed: true
     });
+    */
 
     let section = new PopupMenuSection();
 
@@ -2348,22 +2365,15 @@ class CinnamenuApplet extends TextIconApplet {
     this.powerGroupButtons.push(new GroupButton(
       this.state,
       'user',
-      16,
+      this.state.settings.categoryIconSize,
       '',
       _('Account details'),
       () => spawnCommandLine('cinnamon-settings user')
     ));
     this.powerGroupButtons.push(new GroupButton(
       this.state,
-      this.state.isListView ? 'view-grid-symbolic' : 'view-list-symbolic',
-      16,
-      this.state.isListView ? _('Grid View') : _('List View'),
-      this.state.isListView ? _('Switch to grid view') : _('Switch to list view')
-    ));
-    this.powerGroupButtons.push(new GroupButton(
-      this.state,
       'system-lock-screen',
-      16,
+      this.state.settings.categoryIconSize,
       _('Lock Screen'),
       _('Lock the screen'),
       () => {
@@ -2385,7 +2395,7 @@ class CinnamenuApplet extends TextIconApplet {
     this.powerGroupButtons.push(new GroupButton(
       this.state,
       'application-exit',
-      16,
+      this.state.settings.categoryIconSize,
       _('Logout'),
       _('Leave the session'),
       () => this.session.LogoutRemote(0)
@@ -2393,7 +2403,7 @@ class CinnamenuApplet extends TextIconApplet {
     this.powerGroupButtons.push(new GroupButton(
       this.state,
       'system-shutdown',
-      16,
+      this.state.settings.categoryIconSize,
       _('Quit'),
       _('Shutdown the computer'),
       () => this.session.ShutdownRemote()
