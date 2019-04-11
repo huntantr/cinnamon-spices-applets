@@ -561,7 +561,7 @@ class CinnamenuApplet extends TextIconApplet {
     if (enableCustomMenuHeight) {
       height = this.state.settings.customMenuHeight;
     } else {
-      height = this.categoriesBox.height + this.bottomPane.height;
+      height = this.categoriesBox.height + this.powerGroupBox.height;
     }
 
     if (height >= customHeightLimit) {
@@ -2353,8 +2353,9 @@ class CinnamenuApplet extends TextIconApplet {
 
     // PowerGroupBox
     this.powerGroupBox = new St.BoxLayout({
-      style_class: '',
-      style: 'padding-left: 13px;'
+      style_class: 'menu-categories-box',
+      //style: 'padding-left: 13px;',
+      vertical: true
     });
 
     this.powerGroupButtons.push(new GroupButton(
@@ -2422,6 +2423,17 @@ class CinnamenuApplet extends TextIconApplet {
       y_expand: true,
       expand: false
     });
+
+    /** huntantr - changed from bottomPane */
+    this.groupCategoriesWorkspacesWrapper.add(this.powerGroupBox, {
+      x_fill: false,
+      y_fill: true,
+      x_align: St.Align.START,
+      y_align: St.Align.END,
+      y_expand: true,
+      expand: false
+    });
+
     this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
 
     this.middlePane.add(this.groupCategoriesWorkspacesScrollBox, {
@@ -2436,14 +2448,6 @@ class CinnamenuApplet extends TextIconApplet {
       x_align: St.Align.START,
       y_align: St.Align.START,
       expand: true
-    });
-
-    this.bottomPane.add(this.powerGroupBox, {
-      expand: false,
-      x_fill: false,
-      y_fill: false,
-      x_align: St.Align.START,
-      y_align: St.Align.MIDDLE
     });
 
     if (this.state.settings.descriptionPlacement === 3) {
