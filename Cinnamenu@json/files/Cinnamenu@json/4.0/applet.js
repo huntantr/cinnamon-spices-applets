@@ -270,12 +270,10 @@ class CinnamenuApplet extends TextIconApplet {
 
     // Init settings
     this.loadSettings(true);
-    /** huntantr
     this.state.set({
       isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
       fallbackDescription: this.state.settings.descriptionPlacement === 2 || this.state.settings.descriptionPlacement < 4 ? _('No description available') : ''
     });
-    */
     global.settings.connect('changed::enabled-search-providers', (...args) => this.onEnabledSearchProvidersChange(...args));
 
     this.onEnableBookmarksChange(this.state.settings.enableBookmarks, true);
@@ -681,13 +679,11 @@ class CinnamenuApplet extends TextIconApplet {
         value: 'menuLabel',
         cb: this.updateIconAndLabel
       },
-      /** huntantr
       {
         key: 'startup-view-mode',
         value: 'startupViewMode',
         cb: this.refresh
       },
-      */
       {
         key: 'apps-grid-column-count',
         value: 'appsGridColumnCount',
@@ -1017,12 +1013,15 @@ class CinnamenuApplet extends TextIconApplet {
   initCategories(isReRender) {
     let buttons = [];
     let categoriesChanged = false;
+
+    // add all applications
     if (isReRender) {
       buttons.push(find(this.categoryButtons, button => button.id === 'all'));
     } else {
       buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), 'view-list-text')];
     }
 
+    // add individual categories
     let tree = this.appSystem.get_tree();
     let root = tree.get_root_directory();
     let dirs = [];
@@ -1054,6 +1053,8 @@ class CinnamenuApplet extends TextIconApplet {
         }
       }
     }
+
+    // add places and favorites
     let params = [
       [this.state.settings.showPlaces, 'places', _('Places'), 'folder', 'selectAllPlaces'],
       [this.state.recentEnabled, 'recent', _('Recent Files'), 'folder-recent', 'selectRecent'],
@@ -1160,14 +1161,12 @@ class CinnamenuApplet extends TextIconApplet {
       this.menu.open();
       return;
     }
-    /** huntantr
     let isListView = this.state.settings.startupViewMode === ApplicationsViewMode.LIST, iconSize;
     if (isListView) {
       iconSize = this.state.settings.appsListIconSize > 0 ? this.state.settings.appsListIconSize : 28;
     } else {
       iconSize = this.state.settings.appsGridIconSize > 0 ? this.state.settings.appsGridIconSize : 64;
     }
-    */
     iconSize = this.state.settings.appsGridIconSize > 0 ? this.state.settings.appsGridIconSize : 64;
     this.state.set({
       isListView: isListView,
@@ -1950,9 +1949,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.activeContainer.show();
     }
     if (!this.activeContainer) {
-      /** huntantr
       this.activeContainer = this.state.settings.startupViewMode === ApplicationsViewMode.LIST ? this.applicationsListBox : this.applicationsGridBox;
-      */
       this.activeContainer = this.applicationsGridBox;
     }
 
@@ -2176,12 +2173,10 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   display() {
-    /** huntantr
     this.state.set({
       isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
       displayed: true
     });
-    */
 
     let section = new PopupMenuSection();
 
