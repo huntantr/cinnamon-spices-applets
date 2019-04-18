@@ -38,7 +38,8 @@ const {
 const {
   CategoryListButton,
   AppListGridButton,
-  GroupButton
+  GroupButton,
+  UserButton
 } = require('./buttons');
 
 const {readChromiumBookmarks, readFirefoxProfiles, Gda} = require('./browserBookmarks');
@@ -2358,13 +2359,16 @@ class CinnamenuApplet extends TextIconApplet {
       vertical: true
     });
 
+    let userButton;
+    userButton = new UserButton();
+
     this.powerGroupButtons.push(new GroupButton(
       this.state,
       'user',
       this.state.settings.categoryIconSize,
       '',
       _('Account details'),
-      () => spawnCommandLine('cinnamon-settings user')
+      () => userButton.toggleMenu()
     ));
     this.powerGroupButtons.push(new GroupButton(
       this.state,
@@ -2388,6 +2392,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
       }
     ));
+    /** huntantr - moving option to popupmenu on user power button
     this.powerGroupButtons.push(new GroupButton(
       this.state,
       'application-exit',
@@ -2396,6 +2401,7 @@ class CinnamenuApplet extends TextIconApplet {
       _('Leave the session'),
       () => this.session.LogoutRemote(0)
     ));
+    */
     this.powerGroupButtons.push(new GroupButton(
       this.state,
       'system-shutdown',
@@ -2579,3 +2585,4 @@ class CinnamenuApplet extends TextIconApplet {
 function main(metadata, orientation, panel_height, instance_id) {
   return new CinnamenuApplet(metadata, orientation, panel_height, instance_id);
 }
+
