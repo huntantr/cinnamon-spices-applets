@@ -1019,7 +1019,7 @@ class CinnamenuApplet extends TextIconApplet {
     if (isReRender) {
       buttons.push(find(this.categoryButtons, button => button.id === 'all'));
     } else {
-      buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), 'view-list-text')];
+      buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), 'view-grid-symbolic')];
     }
 
     // add individual categories
