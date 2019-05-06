@@ -38,8 +38,7 @@ const {
 const {
   CategoryListButton,
   AppListGridButton,
-  GroupButton,
-  UserButton
+  GroupButton
 } = require('./buttons');
 
 const {readChromiumBookmarks, readFirefoxProfiles, Gda} = require('./browserBookmarks');
@@ -436,12 +435,8 @@ class CinnamenuApplet extends TextIconApplet {
           }
         }
       } else {
-        let iconName = global.settings.get_string('app-menu-icon-name');
-        if (iconName.includes('-symbolic')) {
-          this.set_applet_icon_symbolic_name(iconName);
-        } else {
-          this.set_applet_icon_name(iconName);
-        }
+        let iconName = "start-here";
+        this.set_applet_icon_name(iconName);
       }
     }, () => {
       global.logWarning('Could not load icon file ' + this.state.settings.menuIcon + ' for menu button');
@@ -1168,7 +1163,6 @@ class CinnamenuApplet extends TextIconApplet {
     } else {
       iconSize = this.state.settings.appsGridIconSize > 0 ? this.state.settings.appsGridIconSize : 64;
     }
-    iconSize = this.state.settings.appsGridIconSize > 0 ? this.state.settings.appsGridIconSize : 64;
     this.state.set({
       isListView: isListView,
       iconSize: iconSize
@@ -1950,7 +1944,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.activeContainer.show();
     }
     if (!this.activeContainer) {
-      this.activeContainer = this.state.settings.startupViewMode === ApplicationsViewMode.LIST ? this.applicationsListBox : this.applicationsGridBox;
+      //this.activeContainer = this.state.settings.startupViewMode === ApplicationsViewMode.LIST ? this.applicationsListBox : this.applicationsGridBox;
       this.activeContainer = this.applicationsGridBox;
     }
 
@@ -2359,16 +2353,13 @@ class CinnamenuApplet extends TextIconApplet {
       vertical: true
     });
 
-    let userButton;
-    userButton = new UserButton();
-
     this.powerGroupButtons.push(new GroupButton(
       this.state,
       'user',
       this.state.settings.categoryIconSize,
       '',
       _('Account details'),
-      () => userButton.toggleMenu()
+      () => spawnCommandLine('cinnamon-settings user')
     ));
     this.powerGroupButtons.push(new GroupButton(
       this.state,
