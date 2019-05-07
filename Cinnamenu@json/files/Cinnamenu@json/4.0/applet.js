@@ -550,16 +550,19 @@ class CinnamenuApplet extends TextIconApplet {
     if (this.state.menuHeight && !force) return;
 
     let height;
-    let monitorHeight = Main.layoutManager.monitors[this.panel.monitorIndex].height;
-    let customHeightLimit = monitorHeight - 120;
-    let {enableCustomMenuHeight} = this.state.settings;
+    //let monitorHeight = Main.layoutManager.monitors[this.panel.monitorIndex].height;
+    //let customHeightLimit = monitorHeight - 120;
+    //let {enableCustomMenuHeight} = this.state.settings;
 
-    if (enableCustomMenuHeight) {
-      height = this.state.settings.customMenuHeight;
-    } else {
+    //if (enableCustomMenuHeight) {
+    //  height = this.state.settings.customMenuHeight;
+    //} else {
       height = this.categoriesBox.height + this.powerGroupBox.height;
-    }
+    //}
 
+    //spawnCommandLine('notify-send ' + height);
+
+    /** huntantr
     if (height >= customHeightLimit) {
       if (enableCustomMenuHeight) {
         height = customHeightLimit;
@@ -567,6 +570,7 @@ class CinnamenuApplet extends TextIconApplet {
         height = Math.round(Math.abs(monitorHeight * 0.55));
       }
     }
+    */
 
     this.groupCategoriesWorkspacesScrollBox.height = height;
     this.applicationsScrollBox.height = height;
