@@ -592,6 +592,11 @@ class CinnamenuApplet extends TextIconApplet {
       this.searchEntry.width = searchWidth > 0 ? searchWidth : this.searchEntry.width;
     }
 
+    if (!this.state.settings.showCategoryText) {
+      this.categoriesBox.width = this.state.settings.categoryIconSize + 28;
+      this.powerGroupBox.width = this.categoriesBox.width;
+    }
+
     this.actor.style += `max-width: ${this.mainBox.width}px;max-height: ${this.mainBox.height}px;`;
     this.groupCategoriesWorkspacesScrollBox.style += `max-width: ${this.categoriesBox.width}px;`;
     this.categoriesOverlayBox.style += `max-width: ${this.categoriesBox.width}px;`;

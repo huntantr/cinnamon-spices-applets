@@ -111,6 +111,15 @@ class CategoryListButton extends PopupBaseMenuItem {
       this.addActor(this.label);
       this.label.realize();
     }
+    else
+    {
+      this.label = new Label({
+        text: "",
+        style_class: 'menu-category-button-label'
+      });
+      this.addActor(this.label);
+      this.label.realize();
+    }
 
     this.actor._delegate = {
       handleDragOver: (source, /* actor, x, y, time */) => {
@@ -1079,7 +1088,7 @@ class GroupButton extends PopupBaseMenuItem {
       adjustedIconSize = iconSize;
     }
     this.actor.style = 'padding-top: ' + (adjustedIconSize / 3) + 'px;padding-bottom: ' + (adjustedIconSize / 3) + 'px;';
-    this.actor.set_style_class_name('menu-favorites-button');
+    this.actor.set_style_class_name('menu-category-button');
     this.entered = null;
 
     if (iconName && iconSize) {
@@ -1153,6 +1162,7 @@ class GroupButton extends PopupBaseMenuItem {
     this.entered = true;
     if (!this.actor) return;
     this.actor.add_style_pseudo_class('hover');
+    this.actor.set_style_class_name('menu-category-button-selected');
     if (this.state.settings.descriptionPlacement === 1) {
       let [x, y] = this.actor.get_transformed_position();
       y -= ((this.actor.height * 2) + 8);
@@ -1179,6 +1189,7 @@ class GroupButton extends PopupBaseMenuItem {
   handleLeave() {
     this.entered = null;
     this.actor.remove_style_pseudo_class('hover');
+    this.actor.set_style_class_name('menu-category-button');
     if (this.state.settings.descriptionPlacement === 1) {
       this.state.trigger('setTooltip');
     } else {
