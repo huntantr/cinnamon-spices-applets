@@ -11,7 +11,13 @@ Cinnamenu is a full featured menu extension for Cinnamon. It is a fork and port 
  * Added tooltips to categories when text is hidden.
    * Also, moved the tooltip to be displayed beside item.
 
-### Features
+### Planned Features
+ * Add popup menu to User icon
+![usermenu](https://github.com/huntantr/cinnamon-spices-applets/blob/master/Cinnamenu%40json/usermenu.png)
+ * Add popup menu to Power icon
+ * Add groups to application panel (similar to Android)
+
+### Original Features from linuxmint
 
  * View apps in a list or grid.
  * Integrated web bookmarks from Chrome, Chromium, Firefox, and Opera.
