@@ -13,7 +13,8 @@ Cinnamenu is a full featured menu extension for Cinnamon. It is a fork and port 
 
 ### Planned Features
  * Add popup menu to User icon
-![usermenu](https://github.com/huntantr/cinnamon-spices-applets/blob/master/Cinnamenu%40json/usermenu.png)
+
+   ![usermenu](https://github.com/huntantr/cinnamon-spices-applets/blob/master/Cinnamenu%40json/usermenu.png)
  * Add popup menu to Power icon
  * Add groups to application panel (similar to Android)
 
