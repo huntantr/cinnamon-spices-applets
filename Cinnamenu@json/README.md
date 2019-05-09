@@ -3,7 +3,7 @@ Cinnamenu
 
 Cinnamenu is a full featured menu extension for Cinnamon. It is a fork and port of the GNOME Shell extension [Gnomenu](https://github.com/The-Panacea-Projects/gnomenu) by The Panacea Projects.
 
-![screenshot](Cinnamenu@json/screenshot.png)
+![screenshot](https://github.com/huntantr/cinnamon-spices-applets/blob/master/Cinnamenu%40json/screenshot.png)
 
 ### New Features
  * Defaults to show only category icons. Only text can be hidden, not the icons.
