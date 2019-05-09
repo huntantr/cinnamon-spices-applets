@@ -102,8 +102,8 @@ class CategoryListButton extends PopupBaseMenuItem {
     }
 
     // huntantr
+    this.categoryNameText = categoryNameText;
     if (this.state.settings.showCategoryText) {
-      this.categoryNameText = categoryNameText;
       this.label = new Label({
         text: this.categoryNameText,
         style_class: 'menu-category-button-label'
@@ -204,6 +204,29 @@ class CategoryListButton extends PopupBaseMenuItem {
       this.state.trigger('scrollToButton', this, true);
     }
 
+    if (this.state.settings.descriptionPlacement === 1) {
+      let [x, y] = this.actor.get_transformed_position();
+      //global.logError('initial y:' + y + ' x:' + x);
+      y -= 8;
+      x += this.actor.width;
+      global.logError('y:' + y + ' x:' + x);
+      if (global.ui_scale > 1) {
+        y += 12;
+        x += 20;
+      }
+      //global.logError('scale y:' + y + ' x:' + x)
+      // fails to add text if it contains a &. Example: Sound & Video
+      this.state.trigger(
+        'setTooltip',
+        [x, y],
+        0,
+        0,
+        `<span>${this.categoryNameText}</span>`
+      );
+    } else {
+      this.state.trigger('setSelectedTitleText', this.categoryNameText);
+    }
+
     this.entered = true;
     if (this.state.settings.categoryClick) {
       this.actor.set_style_class_name('menu-category-button-selected');
@@ -220,6 +243,12 @@ class CategoryListButton extends PopupBaseMenuItem {
     this.entered = null;
     if ((!event || this.state.settings.categoryClick) && this.state.currentCategory !== this.id) {
       this.actor.set_style_class_name('menu-category-button');
+    }
+
+    if (this.state.settings.descriptionPlacement === 1) {
+      this.state.trigger('setTooltip');
+    } else {
+      this.state.trigger('setSelectedTitleText', '');
     }
   }
 
@@ -1165,8 +1194,10 @@ class GroupButton extends PopupBaseMenuItem {
     this.actor.set_style_class_name('menu-category-button-selected');
     if (this.state.settings.descriptionPlacement === 1) {
       let [x, y] = this.actor.get_transformed_position();
-      y -= ((this.actor.height * 2) + 8);
-      x -= (this.actor.width / 2) - 8;
+      //y -= ((this.actor.height * 2) + 8);
+      //x -= (this.actor.width / 2) - 8;
+      y -= 15;
+      x += this.actor.width;
       if (global.ui_scale > 1) {
         y += 12;
         x += 20;

@@ -560,6 +560,7 @@ class CinnamenuApplet extends TextIconApplet {
       height = this.categoriesBox.height + this.powerGroupBox.height;
     //}
 
+    //global.logError('height:' + height);
     //spawnCommandLine('notify-send ' + height);
 
     /** huntantr
