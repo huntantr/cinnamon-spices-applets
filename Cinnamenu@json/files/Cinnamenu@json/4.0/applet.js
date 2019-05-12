@@ -596,7 +596,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     if (!this.state.settings.showCategoryText) {
-      this.categoriesBox.width = this.state.settings.categoryIconSize + 28;
+      this.categoriesBox.width = this.state.settings.categoryIconSize + 32;
       this.powerGroupBox.width = this.categoriesBox.width;
     }
 
@@ -1125,7 +1125,19 @@ class CinnamenuApplet extends TextIconApplet {
       this.categoriesBox.remove_all_children();
       this.initCategories(true);
     }
-    each(this.categoryButtons, (button) => this.categoriesBox.add_actor(button.actor))
+
+    let categoriesBoxChildProperties = {
+      x_fill: false,
+      y_fill: false,
+      x_align: St.Align.LEFT,
+      y_align: St.Align.LEFT
+    };
+    if (!this.state.settings.showCategoryText) {
+      categoriesBoxChildProperties.x_align = St.Align.MIDDLE;
+      categoriesBoxChildProperties.y_align = St.Align.MIDDLE;
+    }
+  //each(this.categoryButtons, (button) => this.categoriesBox.add_actor(button.actor))
+    each(this.categoryButtons, (button) => this.categoriesBox.add(button.actor, categoriesBoxChildProperties))
   }
 
   setActiveCategoryStyle() {
@@ -2423,9 +2435,13 @@ class CinnamenuApplet extends TextIconApplet {
     let powerGroupBoxChildProperties = {
       x_fill: false,
       y_fill: false,
-      x_align: St.Align.MIDDLE,
-      y_align: St.Align.MIDDLE
+      x_align: St.Align.LEFT,
+      y_align: St.Align.LEFT
     };
+    if (!this.state.settings.showCategoryText) {
+      powerGroupBoxChildProperties.x_align = St.Align.MIDDLE;
+      powerGroupBoxChildProperties.y_align = St.Align.MIDDLE;
+    }
     for (let i = 0; i < this.powerGroupButtons.length; i++) {
       this.powerGroupBox.add(this.powerGroupButtons[i].actor, powerGroupBoxChildProperties);
     }
