@@ -565,6 +565,7 @@ class AppListGridButton extends PopupBaseMenuItem {
 
     this.label = new Label({
       text: this.buttonState.app.name,
+      style: `font-size: ${this.state.textSize}px;`,
       style_class: 'menu-application-button-label'
     });
 

@@ -97,6 +97,7 @@ class CinnamenuApplet extends TextIconApplet {
       theme: null,
       isListView: false,
       iconSize: 64,
+      textSize: 10,
       currentCategory: 'favorites',
       startupCategoryOptionsEmpty: true,
       categoryDragged: false,
@@ -225,6 +226,7 @@ class CinnamenuApplet extends TextIconApplet {
           this.state.set({iconSize: this.state.settings.appsListIconSize > 0 ? this.state.settings.appsListIconSize : 28});
         } else {
           this.state.set({iconSize: this.state.settings.appsGridIconSize > 0 ? this.state.settings.appsGridIconSize : 64});
+          this.state.set({textSize: this.state.settings.appsGridTextSize > 0 ? this.state.settings.appsGridTextSize : 10});
         }
       }
     });
@@ -711,6 +713,11 @@ class CinnamenuApplet extends TextIconApplet {
         cb: this.refresh
       },
       {
+        key: 'apps-grid-text-size',
+        value: 'appsGridTextSize',
+        cb: this.refresh
+      },
+      {
         key: 'show-places',
         value: 'showPlaces',
         cb: this.onEnablePlacesChange
@@ -1167,15 +1174,17 @@ class CinnamenuApplet extends TextIconApplet {
       this.menu.open();
       return;
     }
-    let isListView = this.state.settings.startupViewMode === ApplicationsViewMode.LIST, iconSize;
+    let isListView = this.state.settings.startupViewMode === ApplicationsViewMode.LIST, iconSize, textSize;
     if (isListView) {
       iconSize = this.state.settings.appsListIconSize > 0 ? this.state.settings.appsListIconSize : 28;
     } else {
       iconSize = this.state.settings.appsGridIconSize > 0 ? this.state.settings.appsGridIconSize : 64;
+      textSize = this.state.settings.appsGridTextSize > 0 ? this.state.settings.appsGridTextSize : 10;
     }
     this.state.set({
       isListView: isListView,
-      iconSize: iconSize
+      iconSize: iconSize,
+      textSize: textSize
     });
     if (isListView) {
       this.lastGridWidth = this.applicationsGridBox.width
