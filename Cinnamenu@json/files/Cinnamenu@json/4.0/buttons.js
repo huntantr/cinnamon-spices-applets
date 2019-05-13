@@ -209,7 +209,7 @@ class CategoryListButton extends PopupBaseMenuItem {
       //global.logError('initial y:' + y + ' x:' + x);
       y -= 8;
       x += this.actor.width;
-      global.logError('y:' + y + ' x:' + x);
+      //global.logError('y:' + y + ' x:' + x);
       if (global.ui_scale > 1) {
         y += 12;
         x += 20;
@@ -1144,6 +1144,16 @@ class GroupButton extends PopupBaseMenuItem {
       this.addActor(this.icon);
       this.icon.realize();
     }
+
+    if (this.state.settings.showCategoryText) {
+      this.label = new Label({
+        text: this.name,
+        style_class: 'menu-category-button-label'
+      });
+      this.addActor(this.label);
+      this.label.realize();
+    }
+
     this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
     this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
     this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
@@ -1203,13 +1213,23 @@ class GroupButton extends PopupBaseMenuItem {
         y += 12;
         x += 20;
       }
-      this.state.trigger(
-        'setTooltip',
-        [x, y],
-        0,
-        0,
-        `<span>${this.name}${this.description ? '\n<span size="small">' + this.description + '</span>' : ''}</span>`
-      );
+      if (this.state.settings.showCategoryText) {
+        this.state.trigger(
+          'setTooltip',
+          [x, y],
+          0,
+          0,
+          `<span>${this.description}</span>`
+        );
+      } else {
+        this.state.trigger(
+          'setTooltip',
+          [x, y],
+          0,
+          0,
+          `<span>${this.name}${this.description ? '\n<span size="small">' + this.description + '</span>' : ''}</span>`
+        );
+      }
     } else {
       this.state.trigger('setSelectedTitleText', this.name);
       if (this.description) {

@@ -1136,7 +1136,7 @@ class CinnamenuApplet extends TextIconApplet {
       categoriesBoxChildProperties.x_align = St.Align.MIDDLE;
       categoriesBoxChildProperties.y_align = St.Align.MIDDLE;
     }
-  //each(this.categoryButtons, (button) => this.categoriesBox.add_actor(button.actor))
+    //each(this.categoryButtons, (button) => this.categoriesBox.add_actor(button.actor))
     each(this.categoryButtons, (button) => this.categoriesBox.add(button.actor, categoriesBoxChildProperties))
   }
 
@@ -2370,6 +2370,7 @@ class CinnamenuApplet extends TextIconApplet {
     // CategoriesBox
     this.categoriesBox = new St.BoxLayout({
       style_class: 'menu-categories-box',
+      style: 'padding-left: 8px;',
       vertical: true
     });
     this.categoriesOverlayBox.add_actor(this.categoriesBox);
