@@ -19,7 +19,7 @@ Cinnamenu is a full featured menu extension for Cinnamon. It is a fork and port 
  * Add popup menu to Power icon
  * Add groups to application panel (similar to Gnome and Android)
 
-   ![group](https://github.com/huntantr/cinnamon-spices-applets/blob/master/Cinnamenu%40json/group.png)
+   ![groups](https://github.com/huntantr/cinnamon-spices-applets/blob/master/Cinnamenu%40json/groups.png)
 
 ### Original Features from linuxmint
 
