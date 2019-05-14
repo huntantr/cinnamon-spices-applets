@@ -583,6 +583,16 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   applyConstraints() {
+    if (this.categoriesBox.width === undefined){
+      global.logError('this.categoriesBox.width:' + this.categoriesBox.width);
+      global.logError('this.searchBox.width:' + this.searchBox.width);
+    }
+
+    if (!this.state.settings.showCategoryText && (this.searchEntry.width === this.categoriesBox.width)) {
+      this.categoriesBox.width = 60;
+      this.powerGroupBox.width = this.categoriesBox.width;
+    }
+
     if (this.state.settings.descriptionPlacement === 3 && (this.state.isListView || this.state.settings.appsGridColumnCount === 2)) {
       let node = this.searchBox.peek_theme_node();
       if (node) {
@@ -593,11 +603,6 @@ class CinnamenuApplet extends TextIconApplet {
     } else {
       let searchWidth = this.searchBox.width - this.categoriesBox.width;
       this.searchEntry.width = searchWidth > 0 ? searchWidth : this.searchEntry.width;
-    }
-
-    if (!this.state.settings.showCategoryText) {
-      this.categoriesBox.width = this.state.settings.categoryIconSize + 32;
-      this.powerGroupBox.width = this.categoriesBox.width;
     }
 
     this.actor.style += `max-width: ${this.mainBox.width}px;max-height: ${this.mainBox.height}px;`;
@@ -2370,7 +2375,7 @@ class CinnamenuApplet extends TextIconApplet {
     // CategoriesBox
     this.categoriesBox = new St.BoxLayout({
       style_class: 'menu-categories-box',
-      style: 'padding-left: 8px;',
+      //style: 'padding-left: 8px;',
       vertical: true
     });
     this.categoriesOverlayBox.add_actor(this.categoriesBox);

@@ -111,15 +111,6 @@ class CategoryListButton extends PopupBaseMenuItem {
       this.addActor(this.label);
       this.label.realize();
     }
-    else
-    {
-      this.label = new Label({
-        text: "",
-        style_class: 'menu-category-button-label'
-      });
-      this.addActor(this.label);
-      this.label.realize();
-    }
 
     this.actor._delegate = {
       handleDragOver: (source, /* actor, x, y, time */) => {
