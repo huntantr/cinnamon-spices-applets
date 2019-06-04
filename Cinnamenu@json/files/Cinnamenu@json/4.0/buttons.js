@@ -22,7 +22,7 @@ const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const {createStore} = imports.misc.state;
 
-const {_, ApplicationType, stripMarkupRegex} = require('./constants');
+const {_, ApplicationType, PowerGroupPlacement, stripMarkupRegex} = require('./constants');
 const {tryFn} = require('./utils');
 
 const USER_DESKTOP_PATH = getUserDesktopDir();
@@ -276,7 +276,9 @@ class CategoryListButton extends PopupBaseMenuItem {
       this.state.disconnect(this.connectIds[i]);
     }
     this.signals.disconnectAllSignals();
-    this.label.destroy();
+    if (this.state.settings.showCategoryText) {
+      this.label.destroy();
+    }
     if (this.icon) {
       this.icon.destroy();
     }
@@ -1108,9 +1110,16 @@ class GroupButton extends PopupBaseMenuItem {
     if (adjustedIconSize > iconSize) {
       adjustedIconSize = iconSize;
     }
+
     this.actor.style = 'padding-top: ' + (adjustedIconSize / 3) + 'px;padding-bottom: ' + (adjustedIconSize / 3) + 'px;';
-    this.actor.set_style_class_name('menu-category-button');
+    if (this.state.settings.powergroupPlacement === PowerGroupPlacement.HORIZONTAL) {
+      this.actor.set_style_class_name('menu-favorites-button');
+    } else {
+      this.actor.set_style_class_name('menu-category-button');
+    }
     this.entered = null;
+
+    //global.logError('GroupButton');
 
     if (iconName && iconSize) {
       let iconObj = {
@@ -1136,7 +1145,7 @@ class GroupButton extends PopupBaseMenuItem {
       this.icon.realize();
     }
 
-    if (this.state.settings.showCategoryText) {
+    if (this.state.settings.showCategoryText && (this.state.settings.powergroupPlacement === PowerGroupPlacement.VERTICAL)) {
       this.label = new Label({
         text: this.name,
         style_class: 'menu-category-button-label'

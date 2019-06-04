@@ -26,6 +26,11 @@ const ApplicationsViewMode = {
   GRID: 1
 };
 
+const PowerGroupPlacement = {
+  HORIZONTAL: 0,
+  VERTICAL: 1
+};
+
 const fuzzyOptions = {
   before: '<b><u>',
   after: '</u></b>'
@@ -45,4 +50,4 @@ const markdownProps = ['name', 'description'];
 
 const stripMarkupRegex = /(<([^>]+)>)/ig;
 
-module.exports = {_, REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode, fuzzyOptions, gridWidths, searchThresholds, markdownProps, stripMarkupRegex};
+module.exports = {_, REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode, PowerGroupPlacement, fuzzyOptions, gridWidths, searchThresholds, markdownProps, stripMarkupRegex};

@@ -6,17 +6,20 @@ Cinnamenu is a full featured menu extension for Cinnamon. It is a fork and port 
 ![screenshot](https://github.com/huntantr/cinnamon-spices-applets/blob/master/Cinnamenu%40json/screenshot.png)
 
 ### New Features
- * Defaults to show only category icons. Only text can be hidden, not the icons.
- * Moved the power groups to be vertical under the categories.
- * Added setting to change font size on application grid
+ * Added option to display only category icons.
+    *  *Need to figure out how to link the category icon and text settings so they can't both be off*
+ * Added option for power groups placement: Horizontal (default) and Vertical (with categories)
+ * Added setting to change font size on application icons
  * Added tooltips to categories when text is hidden.
-   * Also, moved the tooltip to be displayed beside item.
+    * Also, moved the tooltip to be displayed beside item.
 
 ### Planned Features
- * Add popup menu to User icon
+ * Add option to show menus for power group icons or use system dialogs (default)
+    * Add popup menu to Power icons
+    * Add popup menu to User icon
 
    ![usermenu](https://github.com/huntantr/cinnamon-spices-applets/blob/master/Cinnamenu%40json/usermenu.png)
- * Add popup menu to Power icon
+
  * Add groups to application panel (similar to Gnome and Android)
 
    ![groups](https://github.com/huntantr/cinnamon-spices-applets/blob/master/Cinnamenu%40json/groups.png)
