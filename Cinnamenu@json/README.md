@@ -20,9 +20,8 @@ Cinnamenu is a full featured menu extension for Cinnamon. It is a fork and port 
 
    ![usermenu](https://github.com/huntantr/cinnamon-spices-applets/blob/master/Cinnamenu%40json/usermenu.png)
 
- * Add groups to application panel (similar to Gnome and Android)
+ * Add small icons to application panel
 
-   ![groups](https://github.com/huntantr/cinnamon-spices-applets/blob/master/Cinnamenu%40json/groups.png)
 
 ### Original Features from linuxmint
 
